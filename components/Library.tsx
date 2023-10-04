@@ -2,10 +2,23 @@
 
 import { TbPlaylist } from "react-icons/tb";
 import { AiOutlinePlus } from "react-icons/ai";
+import useAuthModel from "@/hooks/useAuthModal";
+import { useUser } from "@/hooks/useUser";
+import useUploadModel from "@/hooks/useUploadModel";
 
 const Library = () => {
+  const authModel = useAuthModel();
+  const uploadModel = useUploadModel()
+  const { user } = useUser();
+
   const onClick = () => {
-    // Handle Upload later
+    if (!user) {
+      return authModel.onOpen();
+
+    }
+    // TODO: check for subscribe 
+
+    return uploadModel.onOpen()
   };
   return (
     <div className="flex flex-col">
@@ -20,9 +33,7 @@ const Library = () => {
           className=" text-neutral-400 cursor-pointer hover:text-white transition "
         />
       </div>
-      <div className="flex flex-col gap-y-2 mt-4 px-3 ">
-        List of Songs!
-      </div>
+      <div className="flex flex-col gap-y-2 mt-4 px-3 ">List of Songs!</div>
     </div>
   );
 };
