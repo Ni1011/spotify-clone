@@ -12,11 +12,11 @@ const Liked = async () => {
       <Header className="">
         <div className="mt-20">
           <div className=" flex flex-col md:flex-row items-center gap-x-5 ">
-            <div className=" relative h-32 w-32 lg:h-44 lg:w-44 ">
+            <div className=" relative h-32 w-32 lg:h-44 lg:w-44  ">
               <Image
                 fill
                 src="/images/liked.png"
-                className="object-cover"
+                className="object-cover rounded-md"
                 alt="Playlist"
               />
             </div>
