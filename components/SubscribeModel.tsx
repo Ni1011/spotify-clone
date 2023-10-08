@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 
-// import useSubscribeModal from '@/hooks/useSubscribeModal';
 import { useUser } from "@/hooks/useUser";
 import { postData } from "@/libs/helpers";
 import { getStripe } from "@/libs/stripeClient";
@@ -11,6 +10,7 @@ import { Price, ProductWithPrice } from "@/types";
 
 import Model from "./Model";
 import Button from "./Button";
+import useSubscribeModel from "@/hooks/useSubscribeModel";
 
 interface SubscribeModalProps {
   products: ProductWithPrice[];
@@ -27,15 +27,15 @@ const formatPrice = (price: Price) => {
 };
 
 const SubscribeModal: React.FC<SubscribeModalProps> = ({ products }) => {
-  // const subscribeModal = useSubscribeModal();
+  const subscribeModal = useSubscribeModel();
   const { user, isLoading, subscription } = useUser();
 
   const [priceIdLoading, setPriceIdLoading] = useState<string>();
 
   const onChange = (open: boolean) => {
-    // if (!open) {
-    //   subscribeModal.onClose();
-    // }
+    if (!open) {
+      subscribeModal.onClose();
+    }
   };
 
   const handleCheckout = async (price: Price) => {
@@ -98,8 +98,7 @@ const SubscribeModal: React.FC<SubscribeModalProps> = ({ products }) => {
     <Model
       title="Only for premium users"
       description="Listen to music with Spotify Premium"
-      isOpen
-      // ={subscribeModal.isOpen}
+      isOpen={subscribeModal.isOpen}
       onChange={onChange}
     >
       {content}
